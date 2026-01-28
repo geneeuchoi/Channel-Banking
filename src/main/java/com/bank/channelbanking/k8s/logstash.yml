@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: elk
+  name: logstash-config
+data:
+  logstash.conf: |-
+    input {
+        beats {
+            port => 5044
+        }    
+    }
+    output {
+        elasticsearch {
+            hosts => "http://elasticsearch-0.elasticsearch-svc:9200"
+            index => "%{+YYYY.MM.dd}"
+        }
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: elk
+  name: logstash-svc
+  labels:
+    app: logstash
+spec:
+  ports:
+    - port: 5044
+      targetPort: logstash-port
+  selector:
+    app: logstash
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: elk
+  name: logstash
+  labels:
+    app: logstash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+        - name: logstash
+          image: docker.elastic.co/logstash/logstash-oss:7.10.2
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          ports:
+            - containerPort: 5044
+              name: logstash-port
+          volumeMounts:
+            - mountPath: /usr/share/logstash/pipeline/logstash.conf
+              name: logstash-pipeline
+              subPath: logstash.conf
+              readOnly: true
+      volumes:
+        - name: logstash-pipeline
+          configMap:
+            name: logstash-config
+            items:
+              - key: logstash.conf
+                path: logstash.conf
+

@@ -1,0 +1,2 @@
+2026-01-23 20:30:50.123 INFO [main] com.bank.channelbanking.TestController : Test log message for transaction validation
+2026-01-23 20:30:51.456 ERROR [http-nio-8080-exec-1] com.bank.channelbanking.security.filter.AuthorizationFilter : Authentication failed for user request
