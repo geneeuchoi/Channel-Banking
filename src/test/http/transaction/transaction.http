@@ -1,0 +1,13 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+### 송금
+POST http://localhost:8080/api/v1/transaction/transfer
+Content-Type: application/json
+Authorization: Bearer eyJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiZGlyIn0..C271uRTMLp30kPzr.eQ4bHnPaoiQWhl2Bh0DCIoMo4WG0TAsxdRdud2h9Dy6Tz9wfbtBZaTNyN67s3IwKtSCWMDMh6bG1IjBQm2d_ixPFQlwk3H2IjNKK0in7Ghrrzv7iz7TPpQbkwA.FC8EiPWe5l_Wlj0BNaB2wg
+
+{
+  "accountNumber": "1000-1616d6ec",
+  "amount": 1000
+}
