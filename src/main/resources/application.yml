@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: channel-banking
   datasource:
     url: jdbc:mysql://localhost:3308/channel_db
     username: root
@@ -36,7 +38,32 @@ spring:
 jwe:
   secret-key: ${JWE_SECRET_KEY}
 
+feign:
+  client:
+    config:
+      default:
+        # 연결 타임아웃
+        connectTimeout: 5000
+        # 읽기 타임아웃
+        readTimeout: 10000
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      type: B3
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
 logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
   level:
     org.springframework.kafka: INFO
     org.apache.kafka: INFO
+    io.micrometer: DEBUG
+    org.springframework.boot.actuate: DEBUG
+    com.bank.channelbanking.config.FeignConfig: INFO
+    feign: DEBUG
