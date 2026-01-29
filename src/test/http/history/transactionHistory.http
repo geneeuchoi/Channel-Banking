@@ -3,6 +3,6 @@ GET https://examples.http-client.intellij.net/get
     ?generated-in=IntelliJ IDEA
 
 ### 잔액 조회
-GET http://localhost:8080/api/v1/transaction_history/transfer
+GET http://localhost:8080/api/v1/transaction_history/transfer?lastId=999980&limit=20
 Content-Type: application/json
-Authorization: Bearer eyJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiZGlyIn0..C271uRTMLp30kPzr.eQ4bHnPaoiQWhl2Bh0DCIoMo4WG0TAsxdRdud2h9Dy6Tz9wfbtBZaTNyN67s3IwKtSCWMDMh6bG1IjBQm2d_ixPFQlwk3H2IjNKK0in7Ghrrzv7iz7TPpQbkwA.FC8EiPWe5l_Wlj0BNaB2wg
+Authorization: Bearer eyJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiZGlyIn0..EdINeQd4svPa3aqz.qKtXjSJhoz2nZ-rNwz-FHrjrjd2FsVlT2fgYpM-r2WvD86juTdWDcprhbfN4qzlPy_iLVClqTVDsZejEYsxzOutmJEvIcB1tl0EgW12gs5RcjWceHYP7jMQhEg.rJ2Yke96oECuQ9shNxC4oQ

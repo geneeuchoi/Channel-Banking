@@ -6,11 +6,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
-@Entity
-@Table(name = "transaction_histories")
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Entity
+@Table(name = "transaction_histories", indexes = {
+    @Index(name = "idx_sender_user_id_transaction_history_id",
+           columnList = "sender_user_id, transaction_history_id"),
+    @Index(name = "idx_receiver_user_id_transaction_history_id",
+           columnList = "receiver_user_id, transaction_history_id")
+})
 public class TransactionHistory {
 
     @Id
@@ -26,21 +33,17 @@ public class TransactionHistory {
 
     private Long amount;
 
-    @Column(name = "sender_balance_after")
-    private Long senderBalanceAfter;
-
-    @Column(name = "receiver_balance_after")
-    private Long receiverBalanceAfter;
-
     private String type;
 
+    @Column(name = "transacted_at")
+    private LocalDateTime transactedAt;
+
     @Builder
-    public TransactionHistory(Long senderUserId, Long receiverUserId, Long amount, Long senderBalanceAfter, Long receiverBalanceAfter, String type) {
+    public TransactionHistory(Long senderUserId, Long receiverUserId, Long amount, String type, LocalDateTime transactedAt) {
         this.senderUserId = senderUserId;
         this.receiverUserId = receiverUserId;
         this.amount = amount;
-        this.senderBalanceAfter = senderBalanceAfter;
-        this.receiverBalanceAfter = receiverBalanceAfter;
         this.type = type;
+        this.transactedAt = transactedAt;
     }
 }

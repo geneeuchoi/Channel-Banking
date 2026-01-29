@@ -2,6 +2,7 @@ package com.bank.channelbanking.transactionHistory.controller;
 
 import com.bank.channelbanking.global.annotation.Idempotent;
 import com.bank.channelbanking.security.service.CustomUserDetails;
+import com.bank.channelbanking.transactionHistory.dto.response.TransactionHistoryPageResponse;
 import com.bank.channelbanking.transactionHistory.dto.response.TransactionHistoryResponse;
 import com.bank.channelbanking.transactionHistory.service.TransactionHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,8 +24,10 @@ public class TransactionHistoryController {
     //@Idempotent
     @GetMapping("/transfer")
     @Operation(summary = "read transfer history", description = "거래내역 조회")
-    public List<TransactionHistoryResponse> read(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        return transactionHistoryService.requestRead(customUserDetails.getUserId());
+    public TransactionHistoryPageResponse read(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                               @RequestParam(required = false) Long lastId,
+                                               @RequestParam(defaultValue = "20") int limit) {
+        return transactionHistoryService.requestRead(customUserDetails.getUserId(), lastId, limit);
     }
 
 }

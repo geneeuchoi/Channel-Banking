@@ -3,6 +3,8 @@ package com.bank.channelbanking.transactionHistory.dto.event;
 import jakarta.persistence.Column;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
@@ -12,7 +14,6 @@ public class TransactionEvent {
     private Long senderUserId;
     private Long receiverUserId;
     private Long amount;
-    private Long senderBalanceAfter;
-    private Long receiverBalanceAfter;
     private String type;
+    private LocalDateTime transactedAt;
 }
