@@ -17,5 +17,6 @@ CREATE TABLE transaction_histories (
                                        amount BIGINT,
                                        sender_balance_after BIGINT,
                                        receiver_balance_after BIGINT,
-                                       type VARCHAR(50) NOT NULL
+                                       type VARCHAR(50) NOT NULL,
+                                       transacted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
