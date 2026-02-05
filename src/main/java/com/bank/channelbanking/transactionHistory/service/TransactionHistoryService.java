@@ -6,12 +6,14 @@ import com.bank.channelbanking.transactionHistory.dto.response.TransactionHistor
 import com.bank.channelbanking.transactionHistory.entity.TransactionHistory;
 import com.bank.channelbanking.transactionHistory.repository.TransactionHistoryRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TransactionHistoryService {
@@ -58,7 +60,6 @@ public class TransactionHistoryService {
                 .receiverUserId(event.getReceiverUserId())
                 .amount(event.getAmount())
                 .type(event.getType())
-                .transactedAt(event.getTransactedAt())
                 .build();
 
         transactionHistoryRepository.save(history);

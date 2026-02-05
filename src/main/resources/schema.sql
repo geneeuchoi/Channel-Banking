@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS transaction_histories;
+DROP TABLE IF EXISTS transactions;
 
 CREATE TABLE users (
                        user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -15,8 +16,15 @@ CREATE TABLE transaction_histories (
                                        sender_user_id BIGINT NOT NULL,
                                        receiver_user_id BIGINT,
                                        amount BIGINT,
-                                       sender_balance_after BIGINT,
-                                       receiver_balance_after BIGINT,
-                                       type VARCHAR(50) NOT NULL,
-                                       transacted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                                       type VARCHAR(50) NOT NULL
 );
+
+CREATE TABLE transactions (
+                              transaction_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                              sender_id BIGINT NOT NULL,
+                              account_number VARCHAR(50) NOT NULL,
+                              amount BIGINT,
+                              status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+                              transacted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                              CONSTRAINT unique_pending_transaction UNIQUE (sender_id, status)
+)

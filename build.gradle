@@ -37,9 +37,12 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
 
+    // retry
+    implementation 'io.github.resilience4j:resilience4j-spring-boot3:2.1.0'
+
     implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
 
-    // Micrometer Tracing - actuator 필수!
+    // Micrometer Tracing
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'io.micrometer:micrometer-tracing-bridge-brave'
     implementation 'io.zipkin.reporter2:zipkin-reporter-brave'

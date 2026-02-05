@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransactionEvent {
+    private Long transactionId;
     private Long senderUserId;
     private Long receiverUserId;
     private Long amount;

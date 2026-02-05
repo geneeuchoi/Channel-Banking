@@ -47,6 +47,19 @@ feign:
         # 읽기 타임아웃
         readTimeout: 10000
 
+resilience4j:
+  retry:
+    instances:
+      coreBankingTransfer:
+        max-attempts: 3 # 3번 재시도
+        wait-duration: 1s # 재시도 대기시간
+        retry-exceptions:
+          - org.springframework.web.client.ResourceAccessException
+          - feign.RetryableException
+          - java.net.SocketTimeoutException # 이 예외일 때만 재시도
+        ignore-exceptions:
+          - com.bank.channelbanking.global.exception.PendingTransactionExistsException
+
 management:
   tracing:
     sampling:
